@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap');
+
+body {
+  font-family: 'Gowun Batang', serif;
+}
+
+.wrap {
+  width: 900px;
+  margin: 10px auto;
+}
+
+#post-box {
+  display: none;
+  width: 80%;
+  padding: 30px;
+  border: 2px solid;
+  border-radius: 3px;
+  margin: 30px auto;
+}
+
+.card-title {
+  color: lightslategray;
+}
+
+.card-comment {
+  color: blue;
+}
