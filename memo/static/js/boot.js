@@ -38,17 +38,29 @@ function postArticle() {
     },
   });
 }
+
 function showArticles() {
   $.ajax({
     type: "GET",
     url: "/memo",
     data: {},
-    success: function (response) {
-      if (response["result"] == "success") {
-        alert(response["msg"]);
-      }
-    },
-  });
+    success: function(response){
+       let articles = response["articles"];
+       for (let i = 0; i < articles.length; i++) {
+         makeCard(articles[i]["image"], articles[i]["url"], articles[i]["title"], articles[i]["desc"], articles[i]["comment"])
+       }
+    }
+  })
 }
 
-function makeCard(url, title, desc, comment, image) {}
+function makeCard(image, url, title, desc, comment) {
+    let temp_html = `<div class="card">
+                        <img class="card-img-top" src="${image}" alt="Card image cap">
+                        <div class="card-body">
+                        <a href="${url}" target="_blank" class="card-title">${title}</a>
+                        <p class="card-text">${desc}</p>
+                        <p class="card-text comment">${comment}</p>
+                        </div>
+                    </div>`;
+    $("#cards-box").append(temp_html);
+}
