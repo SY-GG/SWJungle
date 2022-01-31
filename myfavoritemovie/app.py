@@ -30,8 +30,11 @@ def show_stars():
 @app.route('/api/like', methods=['POST'])
 def like_star():
     # 1. 클라이언트가 전달한 name_give를 name_receive 변수에 넣습니다.
+    name = request.form['name'];
     # 2. mystar 목록에서 find_one으로 name이 name_receive와 일치하는 star를 찾습니다.
+    result = db.mystar.find_one({'name':name})
     # 3. star의 like 에 1을 더해준 new_like 변수를 만듭니다.
+    db.mystar.update_one({'name':name}, {'$set':{'like': result['like']+1}})
     # 4. mystar 목록에서 name이 name_receive인 문서의 like 를 new_like로 변경합니다.
     # 참고: '$set' 활용하기!
     # 5. 성공하면 success 메시지를 반환합니다.

@@ -10,11 +10,11 @@ function showStar(starlist) {
     data: {},
     success: function (response) {
       if (response["result"] == "success") {
-        let msg = response["msg"];
-        alert(msg);
+        // let msg = response["msg"];
+        // alert(msg);
 
         let starList = response["stars_list"];
-        console.log('리스트:', starList);
+        // console.log('리스트:', starList);
         for (star in starList) {
           // console.log(star, ':', starList[star])
           const imgsrc = starList[star]['img_url'];
@@ -22,7 +22,7 @@ function showStar(starlist) {
           const like = starList[star]['like'];
           const title = starList[star]['recent'];
           const url = starList[star]['url'];
-          console.log(imgsrc, starname, url, like, title);
+          // console.log(imgsrc, starname, url, like, title);
           makeCard(imgsrc, starname, url, like, title);
         }
       }
@@ -50,13 +50,13 @@ function makeCard(imgsrc, starname, url, like, title) {
                     </div>
                 </div>
                 <footer class="card-footer">
-                    <a href="#" onclick="likeStar(${starname})" class="card-footer-item has-text-info">
+                    <a href="#" onclick="likeStar('${starname}')" class="card-footer-item has-text-info">
                         위로!
                         <span class="icon">
                           <i class="fas fa-thumbs-up"></i>
                         </span>
                     </a>
-                    <a href="#" onclick="deleteStar(${starname})" class="card-footer-item has-text-danger">
+                    <a href="#" onclick="deleteStar('${starname}')" class="card-footer-item has-text-danger">
                         삭제
                         <span class="icon">
                           <i class="fas fa-ban"></i>
@@ -66,21 +66,23 @@ function makeCard(imgsrc, starname, url, like, title) {
             </div> 
         `;
   $('#star-box').append(starTemp);
-  console.log($('#star-list'))
+  // console.log($('#star-list'))
 }
 
 function likeStar(name) {
   $.ajax({
     type: "POST",
     url: "/api/like",
-    data: {},
+    data: {name : name},
     success: function (response) {
       if (response["result"] == "success") {
         let msg = response["msg"];
-        alert(msg);
+        // alert(msg);
+        window.location.reload();
       }
     },
   });
+  
 }
 
 function deleteStar(name) {
