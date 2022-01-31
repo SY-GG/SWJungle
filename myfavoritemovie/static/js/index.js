@@ -89,11 +89,12 @@ function deleteStar(name) {
   $.ajax({
     type: "POST",
     url: "/api/delete",
-    data: {},
+    data: {name_give : name},
     success: function (response) {
       if (response["result"] == "success") {
         let msg = response["msg"];
-        alert(msg);
+        // alert(msg);
+        window.location.reload();
       }
     },
   });
